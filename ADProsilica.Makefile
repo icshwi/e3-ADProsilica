@@ -64,6 +64,10 @@ SOURCES += $(APPSRC)/prosilica.cpp
 DBDS    += $(APPSRC)/prosilicaSupport.dbd
 
 
+# USR_LDFLAGS += -Wl,--whole-archive $(where_am_I)$(SUPPORT)/os/linux-x86_64/libPvAPI.a -Wl,--no-whole-archive
+
+
+
 LIBOBJS += $(where_am_I)$(SUPPORT)/os/linux-x86_64/libPvAPI.a
 
 
