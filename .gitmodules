@@ -1,4 +1,4 @@
 [submodule "ADProsilica"]
 	path = ADProsilica
 	url = https://github.com/areaDetector/ADProsilica
-	ignore = all
+	ignore = dirty
