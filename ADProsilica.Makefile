@@ -1,5 +1,6 @@
 #
-#  Copyright (c) 2018 - Present  European Spallation Source ERIC
+#  Copyright (c) 2019            Jeong Han Lee
+#  Copyright (c) 2018 - 2019     European Spallation Source ERIC
 #
 #  The program is free software: you can redistribute
 #  it and/or modify it under the terms of the GNU General Public License
@@ -17,13 +18,11 @@
 # 
 # Author  : Jeong Han Lee
 # email   : han.lee@esss.se
-# Date    :Thursday, September 13 23:20:02 CEST 2018
-# version : 0.0.2
+# Date    : Thursday, March 28 22:43:09 CET 2019
+# version : 0.0.3
 #
 
-
 where_am_I := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
-
 include $(E3_REQUIRE_TOOLS)/driver.makefile
 include $(E3_REQUIRE_CONFIG)/DECOUPLE_FLAGS
 
@@ -41,7 +40,7 @@ endif
 
 # Exclude linux-ppc64e6500
 EXCLUDE_ARCHS = linux-ppc64e6500
-
+EXCLUDE_ARCHS += linux-corei7-poky
 
 
 
@@ -52,10 +51,18 @@ APPDB:=$(APP)/Db
 APPSRC:=$(APP)/src
 
 ## We will use XML2 as the system lib, instead of ADSupport
-## Do we need to load libxml2 when we start iocsh?
 
+
+ifeq ($(T_A),linux-ppc64e6500)
+USR_INCLUDES += -I$(SDKTARGETSYSROOT)/usr/include/libxml2
+else ifeq ($(T_A),linux-corei7-poky)
+USR_INCLUDES += -I$(SDKTARGETSYSROOT)/usr/include/libxml2
+else
 USR_INCLUDES += -I/usr/include/libxml2
-LIB_SYS_LIBS += xml2	
+endif
+
+LIB_SYS_LIBS += xml2
+
 
 USR_CXXFLAGS += -D_LINUX -D_x86
 
