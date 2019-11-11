@@ -99,7 +99,7 @@ LIBOBJS += $(where_am_I)$(SUPPORT)/os/linux-x86_64/libPvAPI.a
 
 # We have to convert all to db 
 TEMPLATES += $(wildcard $(APPDB)/*.db)
-
+TEMPLATES += $(wildcard $(APPDB)/*.req)
 
 
 ## This RULE should be used in case of inflating DB files 
